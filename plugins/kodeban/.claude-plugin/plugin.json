@@ -1,0 +1,35 @@
+{
+  "name": "kodeban",
+  "version": "0.1.0",
+  "description": "Piloter son travail dans KodeBan : /kodeban:in (je commence), /kodeban:out (j'ai fini ou je m'arrête), /kodeban:todo (je note une chose pour plus tard).",
+  "author": { "name": "KodeBan" },
+  "homepage": "https://kodeban.fr",
+  "license": "MIT",
+  "keywords": ["kodeban", "kanban", "sessions"],
+  "userConfig": {
+    "adresse": {
+      "type": "string",
+      "title": "Adresse du branchement KodeBan",
+      "description": "https://kodeban.fr/api/mcp (en local : http://127.0.0.1:8091/mcp)",
+      "required": true,
+      "default": "https://kodeban.fr/api/mcp"
+    },
+    "cle": {
+      "type": "string",
+      "title": "Clé d'accès KodeBan",
+      "description": "Votre clé (kbk_…), créée dans KodeBan : Mon profil › Clés d'accès. Masquée, rangée dans le coffre du système.",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "kodeban": {
+      "type": "http",
+      "url": "${user_config.adresse}",
+      "headers": {
+        "Authorization": "Bearer ${user_config.cle}",
+        "X-KodeBan-Key": "${user_config.cle}"
+      }
+    }
+  }
+}

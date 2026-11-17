@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Affiche le poste (nom de la machine) et le dossier de travail (racine du dépôt Git, sinon dossier courant).
+# Aucun réseau, aucun secret.
+set -u
+case "$(uname -s)" in
+  Darwin) poste="$(scutil --get LocalHostName 2>/dev/null || hostname -s)" ;;
+  MINGW*|MSYS*|CYGWIN*) poste="${COMPUTERNAME:-$(hostname)}" ;;
+  *) poste="$(hostname -s 2>/dev/null || hostname)" ;;
+esac
+dossier="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+if [ -z "$dossier" ]; then
+  dossier="$(pwd -W 2>/dev/null || pwd)"
+fi
+printf 'poste: %s\ndossier: %s\n' "$poste" "$dossier"

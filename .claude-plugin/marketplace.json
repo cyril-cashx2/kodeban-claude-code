@@ -1,0 +1,12 @@
+{
+  "name": "kodeban",
+  "owner": { "name": "KodeBan" },
+  "metadata": { "description": "Catalogue du paquet KodeBan pour Claude Code." },
+  "plugins": [
+    {
+      "name": "kodeban",
+      "source": "./plugins/kodeban",
+      "description": "Piloter son travail dans KodeBan : /kodeban:in, /kodeban:out, /kodeban:todo."
+    }
+  ]
+}

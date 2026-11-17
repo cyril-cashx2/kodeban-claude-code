@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Ouvre une adresse http(s) dans le navigateur. Code d'erreur si rien ne s'ouvre.
+#   kodeban-ouvrir <adresse>            ouvre
+#   kodeban-ouvrir --essai <adresse>    dit seulement ce qui serait lancé
+set -u
+essai=0
+[ "${1:-}" = "--essai" ] && { essai=1; shift; }
+adresse="${1:-}"
+case "$adresse" in
+  http://*|https://*) ;;
+  *) echo "Adresse refusée (http:// ou https:// attendu)." >&2; exit 2 ;;
+esac
+case "$(uname -s)" in
+  Darwin) cmd=(open "$adresse") ;;
+  MINGW*|MSYS*|CYGWIN*) cmd=(rundll32.exe url.dll,FileProtocolHandler "$adresse") ;;
+  *) cmd=(xdg-open "$adresse") ;;
+esac
+if [ "$essai" = 1 ]; then echo "${cmd[*]}"; exit 0; fi
+"${cmd[@]}" >/dev/null 2>&1 || { echo "Le navigateur ne s'est pas ouvert." >&2; exit 1; }
