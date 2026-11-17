@@ -18,14 +18,19 @@ arrête-toi.
 
 ## 1. Où suis-je
 
-Lance `kodeban-poste` : il donne le poste et le dossier. Puis `mes_sessions_ouvertes` avec ce poste
-et ce dossier. Fie-toi au site, pas à ta mémoire de la conversation.
+Lance `kodeban-poste` : il donne le poste et le dossier (ils servent à ouvrir la session). Puis
+`mes_sessions_ouvertes` **sans aucun argument** : ne filtre ni par poste ni par dossier, car le
+dossier courant change dès qu'une commande se déplace et la session de cette conversation ne
+serait plus retrouvée. Fie-toi au site, pas à ta mémoire de la conversation.
 
 ## 2. Une session déjà ouverte
 
 - Une session ouverte dont la référence (`sessionRef`) est celle de cette conversation, ou que cette
   conversation a elle-même ouverte : refuse. « Une conversation, une session. Clôturez avec
   `/kodeban:out`, puis ouvrez une nouvelle conversation. » Arrête-toi.
+- Une session d'un autre poste (`workstation`), ou d'un dossier (`workdir`) sans rapport avec le
+  tien (ni le même, ni un dossier qui contient l'autre) : c'est un autre travail. N'en parle pas et
+  n'y touche pas.
 - Une autre session ouverte pour ce poste et ce dossier (restée ouverte) : montre-la (numéro et
   titre de la tâche, date, dernière note) et propose : la clôturer « à reprendre » avec sa dernière
   note, puis continuer ; ou tout annuler. Attends la réponse. Jamais de clôture sans réponse. Si la

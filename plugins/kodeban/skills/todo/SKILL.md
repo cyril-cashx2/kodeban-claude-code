@@ -16,9 +16,10 @@ Si un outil KodeBan ne répond pas (pas encore autorisé, accès révoqué, site
 phrase, ajoute « Branchez KodeBan : tapez `/mcp`, choisissez kodeban, puis authentifiez-vous. », et
 arrête-toi.
 
-1. Lance `kodeban-poste`, puis `mes_sessions_ouvertes` avec ce poste et ce dossier. La session de
-   cette conversation est celle dont la référence (`sessionRef`) est celle de cette conversation,
-   ou celle que cette conversation a ouverte. S'il n'y en a pas : « Faites d'abord `/kodeban:in`. »
+1. Appelle `mes_sessions_ouvertes` **sans aucun argument** (ni poste ni dossier : le dossier
+   courant a pu changer depuis l'ouverture). La session de cette conversation est celle dont la
+   référence (`sessionRef`) est celle de cette conversation, ou celle que cette conversation a
+   ouverte, quels que soient son poste et son dossier. S'il n'y en a pas : « Faites d'abord `/kodeban:in`. »
    et rien d'autre.
 2. Sans texte : demande le texte et attends.
 3. Crée la tâche dans la première colonne du tableau de la session (`creer_tache` ; si la première
