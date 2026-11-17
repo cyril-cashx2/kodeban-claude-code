@@ -12,23 +12,27 @@ Rien ne se lance tout seul : seules ces trois commandes agissent, et seulement q
 
 ## Installer
 
-Il vous faut une **clé d'accès** KodeBan : dans KodeBan, **Mon profil › Clés d'accès › Créer**.
+Il vous faut un compte sur https://kodeban.fr. Aucune clé à créer ni à copier.
 
-Dans Claude Code (terminal ou extension VS Code) :
+**1. Ajouter le paquet**
 
-```
-/plugin marketplace add cyril-cashx2/kodeban-claude-code
-/plugin install kodeban@kodeban
-```
+- Dans le panneau Claude Code de VS Code : tapez `/plugins`, onglet **Marketplaces**, ajoutez
+  `cyril-cashx2/kodeban-claude-code`, puis installez **kodeban** depuis l'onglet **Plugins**.
+- Ou dans Claude Code en terminal :
+  ```
+  /plugin marketplace add cyril-cashx2/kodeban-claude-code
+  /plugin install kodeban@kodeban
+  ```
 
-Claude Code demande alors :
-- **l'adresse du branchement** : `https://kodeban.fr/api/mcp` (proposée) ; en local, `http://127.0.0.1:8091/mcp` ;
-- **votre clé** : masquée à la saisie, rangée dans le coffre du système, jamais dans un fichier.
+Ouvrez ensuite une nouvelle conversation.
 
-En ligne de commande (`claude plugin install kodeban@kodeban`), rien n'est demandé : tapez ensuite
-`/plugin configure kodeban` dans Claude Code.
+**2. Se connecter à KodeBan**
 
-Redémarrez Claude Code après l'installation.
+Tapez `/mcp`, choisissez **kodeban**, puis **s'authentifier**. Votre navigateur ouvre kodeban.fr
+(connectez-vous si besoin) : cliquez sur **Autoriser**. C'est tout : revenez dans Claude Code.
+
+L'accès ainsi donné apparaît dans KodeBan, **Mon profil › Clés d'accès** (« Claude Code (autorisé le
+…) »). Il permet de lire et de modifier vos projets et tâches avec vos droits, jamais de supprimer.
 
 Si vous aviez branché KodeBan à la main (`claude mcp add … kodeban2 …`), retirez ce branchement :
 `claude mcp remove kodeban2`. Sinon, les outils seraient en double.
@@ -62,26 +66,25 @@ outil KodeBan. Répondez « toujours autoriser », ou ajoutez dans vos réglages
 
 ## Mettre à jour
 
+Dans le panneau de VS Code : `/plugins` › **kodeban** › mettre à jour. En terminal :
+
 ```
 /plugin marketplace update kodeban
 /plugin update kodeban@kodeban
 ```
 
-puis redémarrez Claude Code. Pour recevoir les mises à jour automatiquement : `/plugin` › onglet
-des catalogues › `kodeban` › activer la mise à jour automatique.
+puis ouvrez une nouvelle conversation.
 
 ## Désinstaller
 
-```
-/plugin uninstall kodeban@kodeban
-```
-
-Votre clé reste valable dans KodeBan : révoquez-la dans **Mon profil › Clés d'accès** si vous n'en
-avez plus besoin.
+`/plugins` (ou `/plugin uninstall kodeban@kodeban` en terminal). Puis, dans KodeBan, **Mon profil ›
+Clés d'accès** : révoquez l'accès « Claude Code (autorisé le …) ».
 
 ## En cas de souci
 
-- **« Vérifiez l'adresse et la clé »** : `/plugin configure kodeban`, puis redémarrez Claude Code.
-- **Clé refusée** : clé mal recopiée, révoquée, ou compte désactivé. Créez-en une autre.
+- **« Branchez KodeBan »** : `/mcp` › kodeban › s'authentifier, puis **Autoriser** dans le navigateur.
+- **Accès révoqué dans le profil** : même geste, une nouvelle autorisation est créée.
 - **La page de choix ne s'ouvre pas** : l'adresse est affichée, ouvrez-la vous-même.
 - **Accès de votre organisation expiré** : voyez avec l'administrateur de votre organisation.
+- **Essai sur un site KodeBan local** : le paquet vise kodeban.fr ; branchez le site local à la main
+  (`claude mcp add --transport http kodeban-local http://127.0.0.1:5180/api/mcp`), puis `/mcp`.

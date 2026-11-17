@@ -12,8 +12,9 @@ Référence de cette conversation : `${CLAUDE_SESSION_ID}`
 
 Parle en français courant, en phrases courtes, sans jargon et sans nom d'outil.
 
-Si un outil KodeBan ne répond pas (clé absente ou refusée, site éteint) : dis-le en une phrase,
-ajoute « Vérifiez l'adresse et la clé avec `/plugin configure kodeban`. », et arrête-toi.
+Si un outil KodeBan ne répond pas (pas encore autorisé, accès révoqué, site éteint) : dis-le en une
+phrase, ajoute « Branchez KodeBan : tapez `/mcp`, choisissez kodeban, puis authentifiez-vous. », et
+arrête-toi.
 
 ## 1. La session de cette conversation
 
