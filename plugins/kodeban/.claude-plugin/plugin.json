@@ -1,7 +1,7 @@
 {
   "name": "kodeban",
-  "version": "0.2.1",
-  "description": "Piloter son travail dans KodeBan : /kodeban:in (je commence), /kodeban:out (j'ai fini ou je m'arrête), /kodeban:todo (je note une chose pour plus tard).",
+  "version": "0.3.0",
+  "description": "Piloter son travail dans KodeBan : /kodeban:in (je commence), /kodeban:out (j'ai fini ou je m'arrête), /kodeban:todo (je note une chose pour plus tard), /kodeban:prompt (j'utilise un prompt de la banque).",
   "author": { "name": "KodeBan" },
   "homepage": "https://kodeban.fr",
   "license": "MIT",
