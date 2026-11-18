@@ -6,7 +6,7 @@
     {
       "name": "kodeban",
       "source": "./plugins/kodeban",
-      "description": "Piloter son travail dans KodeBan : /kodeban:in, /kodeban:out, /kodeban:todo."
+      "description": "Piloter son travail dans KodeBan : /kodeban:in, /kodeban:out, /kodeban:todo, /kodeban:prompt."
     }
   ]
 }
