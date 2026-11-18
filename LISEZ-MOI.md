@@ -1,14 +1,17 @@
 # Le paquet KodeBan pour Claude Code
 
-Trois commandes pour piloter votre travail dans [KodeBan](https://kodeban.fr) depuis Claude Code :
+Quatre commandes pour piloter votre travail dans [KodeBan](https://kodeban.fr) depuis Claude Code :
 
 | Commande | Ce qu'elle fait |
 |---|---|
 | `/kodeban:in` | je commence : choisir la tâche et ouvrir une session de travail |
 | `/kodeban:out` | j'ai fini, ou je m'arrête : clôturer la session avec sa note |
 | `/kodeban:todo` | je note une chose pour plus tard, sans quitter ce que je fais |
+| `/kodeban:prompt` | j'utilise un prompt de la banque de prompts |
 
-Rien ne se lance tout seul : seules ces trois commandes agissent, et seulement quand vous les tapez.
+Rien ne se lance tout seul : seules ces quatre commandes agissent, et seulement quand vous les tapez.
+
+Présentation illustrée : https://kodeban.fr/mcp
 
 ## Installer
 
@@ -17,10 +20,10 @@ Il vous faut un compte sur https://kodeban.fr. Aucune clé à créer ni à copie
 **1. Ajouter le paquet**
 
 - Dans le panneau Claude Code de VS Code : tapez `/plugins`, onglet **Marketplaces**, ajoutez
-  `cyril-cashx2/kodeban-claude-code`, puis installez **kodeban** depuis l'onglet **Plugins**.
+  `kodeban/claude-code`, puis installez **kodeban** depuis l'onglet **Plugins**.
 - Ou dans Claude Code en terminal :
   ```
-  /plugin marketplace add cyril-cashx2/kodeban-claude-code
+  /plugin marketplace add kodeban/claude-code
   /plugin install kodeban@kodeban
   ```
 
@@ -53,6 +56,10 @@ faire, prochaine étape) et demande « terminée ou à reprendre ? ». `/kodeban
 
 **`/kodeban:todo vérifier les marges à l'impression`** : crée une tâche dans la première colonne du
 tableau de la session, sans toucher à la session.
+
+**`/kodeban:prompt revue de code`** : cherche un prompt dans votre banque de prompts (les vôtres et
+ceux partagés par votre organisation) et l'applique à la conversation ; sans mots, vos favoris. Le
+prompt d'un collègue vous est d'abord montré en entier : rien n'est appliqué sans votre accord.
 
 ## Autorisations
 

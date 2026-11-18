@@ -1,6 +1,6 @@
 # Publier une nouvelle version du paquet
 
-Depuis le Mac comme depuis le PC : le dépôt GitHub `cyril-cashx2/kodeban-claude-code` fait foi.
+Depuis le Mac comme depuis le PC : le dépôt GitHub `kodeban/claude-code` fait foi.
 Les utilisateurs installent le paquet depuis ce dépôt ; ils ne reçoivent une mise à jour que si le
 **numéro de version** change.
 
