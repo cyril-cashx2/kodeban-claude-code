@@ -2,6 +2,10 @@
 # Ouvre une adresse http(s) dans le navigateur. Code d'erreur si rien ne s'ouvre.
 #   kodeban-ouvrir <adresse>            ouvre
 #   kodeban-ouvrir --essai <adresse>    dit seulement ce qui serait lancé
+#
+# Si le navigateur par défaut est Chrome ou Edge : fenêtre à part, sans onglets ni barre d'adresse
+# (mode « application »), avec le profil habituel, donc la connexion à KodeBan déjà faite.
+# Sinon (Firefox, Safari…) : un onglet ordinaire. KODEBAN_FENETRE=0 force toujours l'onglet.
 set -u
 essai=0
 [ "${1:-}" = "--essai" ] && { essai=1; shift; }
@@ -10,10 +14,76 @@ case "$adresse" in
   http://*|https://*) ;;
   *) echo "Adresse refusée (http:// ou https:// attendu)." >&2; exit 2 ;;
 esac
-case "$(uname -s)" in
-  Darwin) cmd=(open "$adresse") ;;
-  MINGW*|MSYS*|CYGWIN*) cmd=(rundll32.exe url.dll,FileProtocolHandler "$adresse") ;;
-  *) cmd=(xdg-open "$adresse") ;;
-esac
+
+# Navigateur par défaut, quand c'est Chrome ou Edge : « chrome », « edge », sinon rien.
+navigateur_par_defaut() {
+  case "$(uname -s)" in
+    MINGW*|MSYS*|CYGWIN*)
+      local progid
+      progid="$(MSYS_NO_PATHCONV=1 reg.exe query 'HKCU\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice' /v ProgId 2>/dev/null \
+        | tr -d '\r' | awk '/ProgId/ { print $NF }')"
+      case "$progid" in ChromeHTML*) echo chrome ;; MSEdgeHTM*) echo edge ;; esac ;;
+    Darwin)
+      local id
+      id="$(defaults read com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers 2>/dev/null \
+        | awk '/\{ *$/ { d++; if (d == 1) { r = ""; s = "" }; next }
+               /^ *\}/ { if (d == 1 && s && r != "") { gsub(/[";]/, "", r); print r; exit }; d--; next }
+               d == 1 && /LSHandlerRoleAll/ { r = $3 }
+               d == 1 && /LSHandlerURLScheme = https;/ { s = 1 }')"
+      case "$id" in com.google.chrome) echo chrome ;; com.microsoft.edgemac) echo edge ;; esac ;;
+    *)
+      case "$(xdg-settings get default-web-browser 2>/dev/null)" in
+        google-chrome*|chromium*) echo chrome ;; microsoft-edge*) echo edge ;;
+      esac ;;
+  esac
+}
+
+# Programme du navigateur (Windows et Linux) ; vide s'il est introuvable.
+programme() { # chrome|edge
+  case "$(uname -s)" in
+    MINGW*|MSYS*|CYGWIN*)
+      local base rel
+      if [ "$1" = chrome ]; then rel="Google/Chrome/Application/chrome.exe"; else rel="Microsoft/Edge/Application/msedge.exe"; fi
+      for base in "${PROGRAMFILES:-}" "$(printenv 'ProgramFiles(x86)' 2>/dev/null)" "${LOCALAPPDATA:-}"; do
+        [ -n "$base" ] || continue
+        base="$(cygpath -u "$base" 2>/dev/null || echo "$base")"
+        [ -f "$base/$rel" ] && { echo "$base/$rel"; return; }
+      done ;;
+    *)
+      local n
+      if [ "$1" = chrome ]; then set -- google-chrome google-chrome-stable chromium chromium-browser
+      else set -- microsoft-edge microsoft-edge-stable; fi
+      for n in "$@"; do command -v "$n" >/dev/null 2>&1 && { command -v "$n"; return; }; done ;;
+  esac
+}
+
+fenetre=0
+cmd=()
+if [ "${KODEBAN_FENETRE:-1}" != 0 ]; then
+  nav="$(navigateur_par_defaut)"
+  if [ -n "$nav" ]; then
+    if [ "$(uname -s)" = Darwin ]; then
+      appli="Google Chrome"; [ "$nav" = edge ] && appli="Microsoft Edge"
+      cmd=(open -na "$appli" --args "--app=$adresse"); fenetre=1
+    else
+      exe="$(programme "$nav")"
+      [ -n "$exe" ] && { cmd=("$exe" "--app=$adresse"); fenetre=1; }
+    fi
+  fi
+fi
+if [ "$fenetre" = 0 ]; then
+  case "$(uname -s)" in
+    Darwin) cmd=(open "$adresse") ;;
+    MINGW*|MSYS*|CYGWIN*) cmd=(rundll32.exe url.dll,FileProtocolHandler "$adresse") ;;
+    *) cmd=(xdg-open "$adresse") ;;
+  esac
+fi
+
 if [ "$essai" = 1 ]; then echo "${cmd[*]}"; exit 0; fi
+if [ "$fenetre" = 1 ] && [ "$(uname -s)" != Darwin ]; then
+  # Le navigateur peut rester attaché s'il n'était pas déjà lancé : on le détache.
+  "${cmd[@]}" >/dev/null 2>&1 &
+  disown 2>/dev/null || true
+  exit 0
+fi
 "${cmd[@]}" >/dev/null 2>&1 || { echo "Le navigateur ne s'est pas ouvert." >&2; exit 1; }

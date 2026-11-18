@@ -43,7 +43,8 @@ Si vous aviez branché KodeBan à la main (`claude mcp add … kodeban2 …`), r
 ## Les commandes
 
 **`/kodeban:in`** — trois façons :
-- `/kodeban:in` : la page de choix s'ouvre dans votre navigateur, vous cliquez sur la tâche ;
+- `/kodeban:in` : la page de choix s'ouvre, vous cliquez sur la tâche (avec Chrome ou Edge comme
+  navigateur par défaut : dans une fenêtre à part, sans onglets ; sinon dans un onglet) ;
 - `/kodeban:in 57` : la tâche n° 57 ;
 - `/kodeban:in charte graphique` : la tâche qui correspond à ces mots (s'il y en a plusieurs, elles vous sont proposées).
 
