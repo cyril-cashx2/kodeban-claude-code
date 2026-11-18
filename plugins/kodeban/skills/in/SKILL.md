@@ -56,7 +56,13 @@ demande avant d'ouvrir. Puis `ouvrir_session` (assistant `claude_code`, ton mod�
 
 ## 4. Montrer le choix
 
+Lis la carte avec `lire_tache`, quelle que soit la façon dont la tâche a été trouvée (page de choix
+comprise), et lis-la vraiment : c'est le point de départ du travail.
+
 Une ligne : numéro, titre, tableau, projet, client (« projet interne » s'il n'y en a pas).
+Puis le contenu de la carte : la description en entier (sans la résumer ni la couper), la priorité
+et l'échéance s'il y en a, les commentaires (auteur, date, texte), et le nom des pièces jointes.
+Ne répète pas le résumé s'il redit la description. Rien d'autre sur la carte : dis-le en une ligne.
 Si la tâche a déjà eu une session : deux lignes sur là où le travail s'était arrêté (résumé,
 reste à faire, prochaine étape de la dernière session). Les heures du site sont en temps
 universel : convertis-les en heure locale, ou ne donne que la date.
