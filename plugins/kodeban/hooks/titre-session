@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Crochet « message envoyé » : si /kodeban:in a préparé un nom pour cette conversation, le lui donne.
+# Rien à faire dans tous les autres cas (sortie vide). Aucun réseau, aucun secret.
+set -u
+entree="$(cat)"
+ref="$(printf '%s' "$entree" | sed -n 's/.*"session_id"[[:space:]]*:[[:space:]]*"\([A-Za-z0-9-]*\)".*/\1/p' | head -n 1)"
+[ -n "$ref" ] || exit 0
+fichier="$HOME/.claude/kodeban/titres/$ref"
+[ -f "$fichier" ] || exit 0
+nom="$(cat "$fichier")"
+rm -f "$fichier"
+[ -n "$nom" ] || exit 0
+printf '{"hookSpecificOutput":{"hookEventName":"UserPromptSubmit","sessionTitle":"%s"}}\n' "$nom"

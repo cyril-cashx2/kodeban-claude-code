@@ -2,7 +2,7 @@
 description: Commencer une tâche KodeBan dans cette conversation (ouvre une session de travail).
 argument-hint: "[numéro de tâche | quelques mots]"
 disable-model-invocation: true
-allowed-tools: Bash(kodeban-poste) Bash(kodeban-poste *) Bash(kodeban-ouvrir *) Bash(kodeban-pause *) mcp__plugin_kodeban_kodeban__mes_sessions_ouvertes mcp__plugin_kodeban_kodeban__chercher_tache mcp__plugin_kodeban_kodeban__lire_tache mcp__plugin_kodeban_kodeban__lire_sessions mcp__plugin_kodeban_kodeban__ouvrir_session mcp__plugin_kodeban_kodeban__noter_session mcp__plugin_kodeban_kodeban__cloturer_session mcp__plugin_kodeban_kodeban__demander_choix_tache mcp__plugin_kodeban_kodeban__lire_choix_tache
+allowed-tools: Bash(kodeban-poste) Bash(kodeban-poste *) Bash(kodeban-ouvrir *) Bash(kodeban-nommer *) Bash(kodeban-pause *) mcp__plugin_kodeban_kodeban__mes_sessions_ouvertes mcp__plugin_kodeban_kodeban__chercher_tache mcp__plugin_kodeban_kodeban__lire_tache mcp__plugin_kodeban_kodeban__lire_sessions mcp__plugin_kodeban_kodeban__ouvrir_session mcp__plugin_kodeban_kodeban__noter_session mcp__plugin_kodeban_kodeban__cloturer_session mcp__plugin_kodeban_kodeban__demander_choix_tache mcp__plugin_kodeban_kodeban__lire_choix_tache
 ---
 
 # /kodeban:in — je commence
@@ -67,12 +67,26 @@ Si la tâche a déjà eu une session : deux lignes sur là où le travail s'éta
 reste à faire, prochaine étape de la dernière session). Les heures du site sont en temps
 universel : convertis-les en heure locale, ou ne donne que la date.
 
-Termine par : « Qu'est-ce qu'on fait ? »
+Prépare le nom de la conversation : `kodeban-nommer ${CLAUDE_SESSION_ID} "#<numéro> <titre de la
+tâche>"` (titre raccourci s'il dépasse 60 caractères). La conversation le prend au message suivant
+de l'utilisateur. N'en parle pas, sauf si la commande échoue : dis-le alors en une ligne.
 
-## 5. Demande de départ
+## 5. Ce que j'ai compris
 
-La première demande de travail que l'utilisateur fait ensuite est la demande de départ : range-la
-avec `noter_session` (`objective`), en quelques lignes, avant de commencer le travail.
+Sous la carte, un titre « Ce que j'ai compris », puis la tâche reformulée avec tes mots, en
+quelques lignes : le besoin (ce qui ne va pas ou ce qui manque, et pour qui), le résultat attendu,
+et où ça se passe probablement (site, paquet, appli…) si la carte le laisse deviner. Ne recopie pas
+la description : reformule-la. N'invente rien : ce que la carte ne dit pas, pose-le en questions
+(trois au plus, les plus utiles d'abord). Ne cherche pas dans le code à ce stade.
+
+Termine par : « Est-ce que j'ai bien compris ? Qu'est-ce qu'on fait ? »
+
+## 6. Demande de départ
+
+La réponse de l'utilisateur corrige ou confirme ta compréhension, puis donne la première demande de
+travail : c'est la demande de départ. Range-la avec `noter_session` (`objective`), en quelques
+lignes, avec la compréhension validée (corrections comprises), avant de commencer le travail. Si
+l'utilisateur te corrige sans rien demander d'autre, reformule de nouveau et redemande.
 
 ## Règles jusqu'à la clôture de la session
 

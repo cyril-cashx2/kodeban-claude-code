@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Prépare le nom de la conversation : kodeban-nommer <référence de la conversation> <nom>
+# Le crochet « titre-session » le donne à la conversation au message suivant, puis l'efface.
+# Aucun réseau, aucun secret.
+set -u
+ref="$(printf '%s' "${1:-}" | tr -cd 'A-Za-z0-9-')"
+shift || true
+# Ni guillemet, ni barre oblique inversée, ni caractère de contrôle : le nom est recopié tel quel en JSON.
+nom="$(printf '%s' "$*" | tr -d '\\"' | tr -d '\000-\037')"
+if [ -z "$ref" ] || [ -z "$nom" ]; then
+  echo "usage: kodeban-nommer <référence> <nom>" >&2
+  exit 2
+fi
+dossier="$HOME/.claude/kodeban/titres"
+mkdir -p "$dossier"
+printf '%s' "$nom" > "$dossier/$ref"
+echo "nom préparé : $nom"
