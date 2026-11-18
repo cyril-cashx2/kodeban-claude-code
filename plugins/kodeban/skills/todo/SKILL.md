@@ -26,5 +26,5 @@ arrête-toi.
    colonne n'est pas donnée par la session, lis le tableau). Titre = le texte, coupé à 200
    caractères ; s'il est plus long, le texte entier va dans la description. Ne touche pas à la
    session, ne change pas de sujet.
-4. Une seule ligne : « Noté : tâche #57 « … », dans À faire. » (numéro, titre et colonne réels),
+4. Une seule ligne : « Noté : tâche #57 « … », dans À faire. » (numéro = champ `number` de la tâche créée, titre et colonne réels),
    puis reprends là où on en était.

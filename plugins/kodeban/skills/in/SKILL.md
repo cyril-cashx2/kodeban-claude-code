@@ -45,6 +45,9 @@ serait plus retrouvée. Fie-toi au site, pas à ta mémoire de la conversation.
   jusqu'à « chosen » ou « expired ». Expirée : dis-le et arrête-toi. Choisie : la session est déjà
   ouverte par le site.
 - **Un numéro** : `lire_tache`. Introuvable : dis-le, n'ouvre rien.
+
+Le numéro d'une tâche est le « #12 » affiché sur le site : champ `number` des réponses, argument
+`taskNumber` des outils. Jamais le champ `id`, qui est interne et n'a rien à voir avec le numéro.
 - **Des mots** : `chercher_tache`. Une seule tâche : c'est elle. Plusieurs : propose-les (numéro,
   titre, tableau, projet) et attends le choix. Aucune : dis-le et propose `/kodeban:in` sans rien
   pour ouvrir la page de choix.
