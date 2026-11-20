@@ -2,7 +2,7 @@
 description: Clôturer la session KodeBan de cette conversation (terminée ou à reprendre).
 argument-hint: "[pause | !]"
 disable-model-invocation: true
-allowed-tools: Bash(kodeban-poste) Bash(kodeban-poste *) Bash(git log *) Bash(git branch *) Bash(git rev-parse *) mcp__plugin_kodeban_kodeban__mes_sessions_ouvertes mcp__plugin_kodeban_kodeban__lire_sessions mcp__plugin_kodeban_kodeban__noter_session mcp__plugin_kodeban_kodeban__ajouter_reference_session mcp__plugin_kodeban_kodeban__cloturer_session mcp__plugin_kodeban_kodeban__lire_tache
+allowed-tools: Bash(kodeban-poste) PowerShell(kodeban-poste) Bash(kodeban-poste *) PowerShell(kodeban-poste *) Bash(git log *) Bash(git branch *) Bash(git rev-parse *) mcp__plugin_kodeban_kodeban__mes_sessions_ouvertes mcp__plugin_kodeban_kodeban__lire_sessions mcp__plugin_kodeban_kodeban__noter_session mcp__plugin_kodeban_kodeban__ajouter_reference_session mcp__plugin_kodeban_kodeban__cloturer_session mcp__plugin_kodeban_kodeban__lire_tache
 ---
 
 # /kodeban:out — j'ai fini, ou je m'arrête

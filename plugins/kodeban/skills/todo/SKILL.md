@@ -2,7 +2,7 @@
 description: Noter une chose à faire plus tard dans le tableau de la session KodeBan en cours.
 argument-hint: "<texte>"
 disable-model-invocation: true
-allowed-tools: Bash(kodeban-poste) Bash(kodeban-poste *) mcp__plugin_kodeban_kodeban__mes_sessions_ouvertes mcp__plugin_kodeban_kodeban__lire_tableau mcp__plugin_kodeban_kodeban__creer_tache
+allowed-tools: Bash(kodeban-poste) PowerShell(kodeban-poste) Bash(kodeban-poste *) PowerShell(kodeban-poste *) mcp__plugin_kodeban_kodeban__mes_sessions_ouvertes mcp__plugin_kodeban_kodeban__lire_tableau mcp__plugin_kodeban_kodeban__creer_tache
 ---
 
 # /kodeban:todo — je note une chose pour plus tard

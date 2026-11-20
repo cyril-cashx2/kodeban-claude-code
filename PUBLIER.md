@@ -20,3 +20,10 @@ Essai avant publication, sur le poste : `claude --plugin-dir plugins/kodeban` la
 avec le paquet du dossier, sans l'installer.
 
 Jamais dans le dépôt : une clé, une adresse privée, un nom de client.
+
+## Windows
+
+Chaque commande de `bin/` et le crochet de `hooks/` ont une version PowerShell dans
+`plugins/kodeban/windows/`, lancée par le `.cmd` du même nom : PowerShell et cmd le prennent avant
+le script Bash, et rien n'exige Git ni Bash. Toute modification d'un script Bash se reporte dans sa
+version PowerShell ; avant de publier, sur un PC : `bash essais/comparer-windows.sh`.
