@@ -1,6 +1,6 @@
 ---
 description: Clôturer la session KodeBan de cette conversation (terminée ou à reprendre).
-argument-hint: "[pause]"
+argument-hint: "[pause | !]"
 disable-model-invocation: true
 allowed-tools: Bash(kodeban-poste) Bash(kodeban-poste *) Bash(git log *) Bash(git branch *) Bash(git rev-parse *) mcp__plugin_kodeban_kodeban__mes_sessions_ouvertes mcp__plugin_kodeban_kodeban__lire_sessions mcp__plugin_kodeban_kodeban__noter_session mcp__plugin_kodeban_kodeban__ajouter_reference_session mcp__plugin_kodeban_kodeban__cloturer_session mcp__plugin_kodeban_kodeban__lire_tache
 ---
@@ -37,11 +37,13 @@ Sans mot de passe, sans clé, sans donnée d'un client. Jamais la conversation r
 
 ## 3. L'accord
 
-- Sans `pause` : demande « Terminée, ou à reprendre ? » et l'accord sur la note. Attends la réponse.
+- Avec `!` (seul, ou avec des mots) : ne pose aucune question et n'attends rien. La note montrée
+  vaut accord : passe aussitôt à la clôture, « terminée ».
 - Avec `pause` : demande seulement l'accord sur la note ; la session sera clôturée « à reprendre ».
   Attends la réponse.
+- Sinon : demande « Terminée, ou à reprendre ? » et l'accord sur la note. Attends la réponse.
 
-Corrige la note si l'utilisateur le demande, puis redemande l'accord.
+Corrige la note si l'utilisateur le demande, puis redemande l'accord (sauf avec `!`).
 
 ## 4. Clôturer
 

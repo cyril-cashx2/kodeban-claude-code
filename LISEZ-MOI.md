@@ -53,7 +53,8 @@ départ de la session. Ensuite, Claude tient la note de la session à jour au fi
 
 **`/kodeban:out`** : Claude montre la note finale (ce qui a été fait, décisions, commits, reste à
 faire, prochaine étape) et demande « terminée ou à reprendre ? ». `/kodeban:out pause` clôture
-« à reprendre » sans poser la question.
+« à reprendre » sans poser la question. `/kodeban:out !` montre la note et clôture aussitôt
+« terminée », sans rien demander.
 
 **`/kodeban:todo vérifier les marges à l'impression`** : crée une tâche dans la première colonne du
 tableau de la session, sans toucher à la session.
